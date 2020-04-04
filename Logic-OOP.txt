@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nomor_3
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            int input = Convert.ToInt32(Console.ReadLine());
+            int[] p1 = new int[input];
+            int j = 10;
+            int masuk = 0;
+
+            for ( int i =0 ; i< input; i++)
+            {
+                while( j> p1[i] && i < input)
+                {
+                    for (int k =1; k <= j; k++)
+                    {
+                        if (j % k == 0)
+                        {
+                            masuk++;
+                        }
+                    }
+                    if (masuk == 2)
+                    {
+                        if (check(j) == true)
+                        {
+                            p1[1] = j;
+                            j++;
+                            masuk = 0;
+                            break;
+                        }
+                        else
+                        {
+                            j++;
+                            masuk = 0;
+                        }
+                    }
+                    else
+                    {
+                        j++;
+                        masuk = 0;
+                    }
+                }
+            }
+        }
+
+        public static bool check(int coba)
+        {
+            char temp = 'a';
+            char[] cek = coba.ToString().ToCharArray();
+            for( int i = 0; i < cek.Length; i++)
+            {
+                if (i == 0)
+                {
+                    temp = cek[i];
+                    cek[i] = cek[cek.Length - 1];
+                    cek[cek.Length - 1] = temp;
+                }
+            }
+
+            string baru = new string(cek);
+            int nomor = Convert.ToInt32(baru);
+            int c = 0;
+            for ( int k = 1; k<= nomor; k++)
+            {
+                if( nomor % k == 0)
+                {
+                    c++;
+                }
+            }
+            if ( c== 2)
+            {
+                hasil(coba, nomor);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static void hasil ( int a, int b)
+        {
+            Console.Write(a + " and ");
+            Console.WriteLine(b + " are match");
+        }
+    }
+
+}
